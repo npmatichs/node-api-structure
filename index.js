@@ -24,19 +24,9 @@ if (components.length) {
         let componentStat = fs.statSync(`${components_path}/${components[i]}`);
 
         if (componentStat && componentStat.isDirectory()) {
-            let Component = require(`${components_path}/${components[i]}`);
+            let routes = require(`${components_path}/${components[i]}/routes`);
 
-            let component = new Component(server.app, components[i]);
-
-            let router = new Router(server.app, component);
-
-            component.load(router);
-
-            if (component.isLoaded()) {
-                server.loadedComponents.push(component);
-            } else {
-                throw new Error(`Unable to load component ${components[i]}`);
-            }
+            // routes()
         } else {
             throw new Error('Unable to initialize application components.');
         }
